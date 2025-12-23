@@ -708,11 +708,7 @@ function HomeContent() {
                         type="button"
                         className="btn-primary px-6"
                         onClick={() => {
-                          if (STRIPE_CHECKOUT_URL && STRIPE_CHECKOUT_URL !== '[PASTE_YOUR_STRIPE_LINK_HERE]') {
-                            window.location.href = STRIPE_CHECKOUT_URL;
-                          } else {
-                            alert('Stripe checkout URL not configured. Please add your Stripe checkout link.');
-                          }
+                          window.location.href = STRIPE_CHECKOUT_URL;
                         }}
                       >
                         Unlock Full Letter (£4.99)
