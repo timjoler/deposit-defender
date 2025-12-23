@@ -107,8 +107,7 @@ function HomeContent() {
   const [isPaid, setIsPaid] = useState(false);
   const [copied, setCopied] = useState(false);
   
-  // Replace with your actual Stripe checkout link
-  const STRIPE_CHECKOUT_URL = '[PASTE_YOUR_STRIPE_LINK_HERE]';
+  const STRIPE_CHECKOUT_URL = 'https://buy.stripe.com/4gM9AT7YAaSVfUF6bc0gw00';
 
   const currentLoadingLabel = LOADING_STEPS[loadingStepIndex] ?? LOADING_STEPS[0];
 
