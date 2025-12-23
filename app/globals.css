@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1c1917; /* warm dark brown/stone-900 */
+  --foreground: #e7e5e4; /* warm gray-200 */
+  --accent: #c2410c; /* warm orange-700 */
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #292524 0, #1c1917 55%, #1c1917 100%);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+.card {
+  @apply rounded-2xl border border-stone-800/60 bg-stone-900/70 shadow-xl shadow-stone-900/40 backdrop-blur-xl;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center rounded-full bg-[#c2410c] px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-orange-900/40 transition hover:bg-[#9a3412] disabled:cursor-not-allowed disabled:opacity-60;
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center rounded-full border border-stone-600/80 bg-stone-900/60 px-4 py-2 text-sm font-semibold text-stone-100 shadow-sm hover:bg-stone-800/80;
+}
+
+.badge-pill {
+  @apply inline-flex items-center rounded-full border border-stone-700 bg-stone-900/80 px-3 py-1 text-xs font-medium uppercase tracking-wide text-stone-300;
+}
+
+.glass {
+  @apply bg-stone-900/60 backdrop-blur-xl border border-stone-800/60;
+}
+
+.scrollbar-thin::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background-color: rgba(168, 162, 158, 0.6);
+  border-radius: 9999px;
+}
