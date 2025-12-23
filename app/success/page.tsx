@@ -1,61 +1,29 @@
 'use client';
 
-import { useEffect, useState, Suspense } from 'react';
+import { useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { CheckCircle, Loader2 } from 'lucide-react';
 
 function SuccessContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
-  const [verified, setVerified] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const sessionId = searchParams.get('session_id');
+  const paid = searchParams.get('paid');
 
   useEffect(() => {
-    if (!sessionId) {
-      setLoading(false);
-      return;
+    if (paid === 'true') {
+      // Store in localStorage that payment was successful
+      localStorage.setItem('deposit_defender_paid', 'true');
+      // Redirect back to main page with ?paid=true so it gets picked up
+      setTimeout(() => {
+        router.push('/?paid=true');
+      }, 2000);
+    } else {
+      // If no paid parameter, redirect to home
+      router.push('/');
     }
+  }, [paid, router]);
 
-    // Verify payment
-    fetch('/api/verify-payment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.verified) {
-          setVerified(true);
-          // Store in localStorage that payment was successful
-          localStorage.setItem('deposit_defender_payment_verified', 'true');
-          // Redirect back to main page after 2 seconds
-          setTimeout(() => {
-            router.push('/');
-          }, 2000);
-        } else {
-          setVerified(false);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Verification error:', error);
-        setLoading(false);
-      });
-  }, [sessionId, router]);
-
-  if (loading) {
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="text-center">
-          <Loader2 className="mx-auto h-8 w-8 animate-spin text-amber-400" />
-          <p className="mt-4 text-stone-300">Verifying payment...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (verified) {
+  if (paid === 'true') {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
@@ -74,13 +42,8 @@ function SuccessContent() {
   return (
     <div className="flex min-h-screen items-center justify-center">
       <div className="text-center">
-        <p className="text-stone-300">Payment verification failed.</p>
-        <button
-          onClick={() => router.push('/')}
-          className="mt-4 btn-primary"
-        >
-          Return to Home
-        </button>
+        <Loader2 className="mx-auto h-8 w-8 animate-spin text-amber-400" />
+        <p className="mt-4 text-stone-300">Redirecting...</p>
       </div>
     </div>
   );

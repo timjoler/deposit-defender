@@ -793,7 +793,7 @@ export default function Home() {
         <div className="text-center">
           <p className="text-stone-300">Loading...</p>
         </div>
-      </div>
+    </div>
     }>
       <HomeContent />
     </Suspense>
